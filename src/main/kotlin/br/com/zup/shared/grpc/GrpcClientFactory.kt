@@ -13,23 +13,15 @@ import javax.inject.Singleton
 class GrpcClientFactory(@GrpcChannel("keymanager") val channel: ManagedChannel) {
 
     @Singleton
-    fun registrar(): KeymanagerRegistraChavePixGrpcServiceGrpc.KeymanagerRegistraChavePixGrpcServiceBlockingStub? {
-        return KeymanagerRegistraChavePixGrpcServiceGrpc.newBlockingStub(channel)
-    }
+    fun registrar() = KeymanagerRegistraChavePixGrpcServiceGrpc.newBlockingStub(channel)
 
     @Singleton
-    fun remover(): KeymanagerRemoveChavePixGrpcServiceGrpc.KeymanagerRemoveChavePixGrpcServiceBlockingStub? {
-        return KeymanagerRemoveChavePixGrpcServiceGrpc.newBlockingStub(channel)
-    }
+    fun remover() = KeymanagerRemoveChavePixGrpcServiceGrpc.newBlockingStub(channel)
 
     @Singleton
-    fun consultar(): KeymanagerConsultaChavePixGrpcServiceGrpc.KeymanagerConsultaChavePixGrpcServiceBlockingStub? {
-        return KeymanagerConsultaChavePixGrpcServiceGrpc.newBlockingStub(channel)
-    }
+    fun consultar() = KeymanagerConsultaChavePixGrpcServiceGrpc.newBlockingStub(channel)
 
     @Singleton
-    fun listar(): KeymanagerListaChavesPixGrpcServiceGrpc.KeymanagerListaChavesPixGrpcServiceBlockingStub? {
-        return KeymanagerListaChavesPixGrpcServiceGrpc.newBlockingStub(channel)
-    }
+    fun listar() = KeymanagerListaChavesPixGrpcServiceGrpc.newBlockingStub(channel)
 
 }
