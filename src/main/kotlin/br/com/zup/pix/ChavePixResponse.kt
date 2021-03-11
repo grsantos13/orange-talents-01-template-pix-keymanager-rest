@@ -2,9 +2,9 @@ package br.com.zup.pix
 
 import br.com.zup.ConsultaChavePixResponse
 import br.com.zup.ListaChavesPixResponse.ChavePix
-import br.com.zup.shared.timestampToLocalDateTime
 import com.fasterxml.jackson.annotation.JsonFormat
 import java.time.LocalDateTime
+import java.time.ZoneOffset
 import java.util.*
 import br.com.zup.Conta as ContaGrpc
 import br.com.zup.Titular as TitularGrpc
@@ -27,7 +27,13 @@ data class DetalhesChavePixResponse(
                 tipo = TipoDeChave.valueOf(chaveResponse.tipoDeChave.name),
                 chave = chaveResponse.chave,
                 conta = Conta(chaveResponse.conta),
-                registradaEm = timestampToLocalDateTime(chaveResponse.criadaEm)
+                registradaEm = chaveResponse.criadaEm.let {
+                    LocalDateTime.ofEpochSecond(
+                        it.seconds,
+                        it.nanos,
+                        ZoneOffset.UTC
+                    )
+                }
             )
         }
     }
@@ -48,7 +54,13 @@ data class ChavePixResponse(
                 chave.chave,
                 TipoDeChave.valueOf(chave.tipoDaChave.name),
                 tipoDeConta = TipoDeConta.valueOf(chave.tipoDaConta.name),
-                registradaEm = timestampToLocalDateTime(chave.registradaEm)
+                registradaEm = chave.registradaEm.let {
+                    LocalDateTime.ofEpochSecond(
+                        it.seconds,
+                        it.nanos,
+                        ZoneOffset.UTC
+                    )
+                }
             )
         }
     }
