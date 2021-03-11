@@ -1,4 +1,4 @@
-package br.com.zup.shared
+package br.com.zup.shared.grpc
 
 import br.com.zup.KeymanagerConsultaChavePixGrpcServiceGrpc
 import br.com.zup.KeymanagerListaChavesPixGrpcServiceGrpc

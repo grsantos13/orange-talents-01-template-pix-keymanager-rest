@@ -8,6 +8,10 @@ plugins {
     id("com.google.protobuf") version "0.8.13"
 }
 
+allOpen{
+    annotation("io.micronaut.http.annotation.Controller")
+}
+
 version = "0.1"
 group = "br.com.zup"
 
@@ -27,6 +31,8 @@ micronaut {
 
 dependencies {
     implementation("io.micronaut:micronaut-validation")
+    implementation("io.micronaut.beanvalidation:micronaut-hibernate-validator")
+    implementation("org.hibernate:hibernate-validator:6.1.6.Final")
     implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8:${kotlinVersion}")
     implementation("org.jetbrains.kotlin:kotlin-reflect:${kotlinVersion}")
     implementation("io.micronaut.kotlin:micronaut-kotlin-runtime")
