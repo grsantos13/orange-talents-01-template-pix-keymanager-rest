@@ -13,7 +13,7 @@ class RemoveChaveController(
     private val removeChaveClient: KeymanagerRemoveChavePixGrpcServiceGrpc.KeymanagerRemoveChavePixGrpcServiceBlockingStub
 ) {
 
-    @Delete("{idPix}")
+    @Delete("/{idPix}")
     fun remover(@PathVariable idCliente: UUID, @PathVariable idPix: UUID): HttpResponse<Any> {
         val removeChavePixRequest = RemoveChavePixRequest.newBuilder()
             .setIdCliente(idCliente.toString())
