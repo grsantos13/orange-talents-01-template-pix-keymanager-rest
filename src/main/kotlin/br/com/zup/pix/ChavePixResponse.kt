@@ -1,14 +1,15 @@
 package br.com.zup.pix
 
 import br.com.zup.ConsultaChavePixResponse
+import br.com.zup.ListaChavesPixResponse.ChavePix
+import br.com.zup.shared.timestampToLocalDateTime
 import com.fasterxml.jackson.annotation.JsonFormat
 import java.time.LocalDateTime
-import java.time.ZoneOffset
 import java.util.*
 import br.com.zup.Conta as ContaGrpc
 import br.com.zup.Titular as TitularGrpc
 
-data class ChavePixResponse(
+data class DetalhesChavePixResponse(
     val IdPix: UUID,
     val IdCliente: UUID,
     val tipo: TipoDeChave,
@@ -19,18 +20,35 @@ data class ChavePixResponse(
 ) {
 
     companion object {
-        fun from(chaveResponse: ConsultaChavePixResponse): ChavePixResponse {
-            return ChavePixResponse(
+        fun from(chaveResponse: ConsultaChavePixResponse): DetalhesChavePixResponse {
+            return DetalhesChavePixResponse(
                 IdPix = UUID.fromString(chaveResponse.idPix),
                 IdCliente = UUID.fromString(chaveResponse.idCliente),
                 tipo = TipoDeChave.valueOf(chaveResponse.tipoDeChave.name),
                 chave = chaveResponse.chave,
                 conta = Conta(chaveResponse.conta),
-                registradaEm = LocalDateTime.ofEpochSecond(
-                    chaveResponse.criadaEm.seconds,
-                    chaveResponse.criadaEm.nanos,
-                    ZoneOffset.UTC
-                )
+                registradaEm = timestampToLocalDateTime(chaveResponse.criadaEm)
+            )
+        }
+    }
+}
+
+data class ChavePixResponse(
+    val idPix: UUID,
+    val chave: String,
+    val tipo: TipoDeChave,
+    val tipoDeConta: TipoDeConta,
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+    val registradaEm: LocalDateTime
+) {
+    companion object {
+        fun from(chave: ChavePix): ChavePixResponse {
+            return ChavePixResponse(
+                UUID.fromString(chave.idPix),
+                chave.chave,
+                TipoDeChave.valueOf(chave.tipoDaChave.name),
+                tipoDeConta = TipoDeConta.valueOf(chave.tipoDaConta.name),
+                registradaEm = timestampToLocalDateTime(chave.registradaEm)
             )
         }
     }

@@ -23,6 +23,6 @@ class ConsultaChaveController(
             .setIdPixEIdCliente(porClienteEIdPix)
             .build()
         val chavePixResponse = consultaChaveClient.consultar(request)
-        return HttpResponse.ok(ChavePixResponse.from(chavePixResponse))
+        return HttpResponse.ok(DetalhesChavePixResponse.from(chavePixResponse))
     }
 }
