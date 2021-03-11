@@ -2,7 +2,6 @@ package br.com.zup.pix
 
 import br.com.zup.ConsultaChavePixResponse
 import br.com.zup.ListaChavesPixResponse.ChavePix
-import com.fasterxml.jackson.annotation.JsonFormat
 import java.time.LocalDateTime
 import java.time.ZoneOffset
 import java.util.*
@@ -15,7 +14,6 @@ data class DetalhesChavePixResponse(
     val tipo: TipoDeChave,
     val chave: String,
     val conta: Conta,
-    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     val registradaEm: LocalDateTime
 ) {
 
@@ -44,7 +42,6 @@ data class ChavePixResponse(
     val chave: String,
     val tipo: TipoDeChave,
     val tipoDeConta: TipoDeConta,
-    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     val registradaEm: LocalDateTime
 ) {
     companion object {
