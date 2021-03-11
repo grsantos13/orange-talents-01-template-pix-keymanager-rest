@@ -27,7 +27,7 @@ data class DetalhesChavePixResponse(
                 tipo = TipoDeChave.valueOf(chaveResponse.tipoDeChave.name),
                 chave = chaveResponse.chave,
                 conta = Conta(chaveResponse.conta),
-                registradaEm = chaveResponse.criadaEm.let {
+                registradaEm = chaveResponse.registradaEm.let {
                     LocalDateTime.ofEpochSecond(
                         it.seconds,
                         it.nanos,
