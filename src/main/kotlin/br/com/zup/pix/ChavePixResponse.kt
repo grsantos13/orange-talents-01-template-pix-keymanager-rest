@@ -5,6 +5,8 @@ import com.fasterxml.jackson.annotation.JsonFormat
 import java.time.LocalDateTime
 import java.time.ZoneOffset
 import java.util.*
+import br.com.zup.Conta as ContaGrpc
+import br.com.zup.Titular as TitularGrpc
 
 data class ChavePixResponse(
     val IdPix: UUID,
@@ -23,16 +25,7 @@ data class ChavePixResponse(
                 IdCliente = UUID.fromString(chaveResponse.idCliente),
                 tipo = TipoDeChave.valueOf(chaveResponse.tipoDeChave.name),
                 chave = chaveResponse.chave,
-                conta = Conta(
-                    instituicao = chaveResponse.conta.instituicao,
-                    agencia = chaveResponse.conta.agencia,
-                    numeroDaConta = chaveResponse.conta.numero,
-                    titular = Titular(
-                        nome = chaveResponse.conta.titular.nome,
-                        cpf = chaveResponse.conta.titular.cpf
-                    ),
-                    tipoDeConta = TipoDeConta.valueOf(chaveResponse.conta.tipoDeConta.name)
-                ),
+                conta = Conta(chaveResponse.conta),
                 registradaEm = LocalDateTime.ofEpochSecond(
                     chaveResponse.criadaEm.seconds,
                     chaveResponse.criadaEm.nanos,
@@ -49,9 +42,22 @@ data class Conta(
     val numeroDaConta: String,
     val titular: Titular,
     val tipoDeConta: TipoDeConta
-)
+) {
+    constructor(conta: ContaGrpc) : this(
+        conta.instituicao,
+        conta.agencia,
+        conta.numero,
+        Titular(conta.titular),
+        TipoDeConta.valueOf(conta.tipoDeConta.name)
+    )
+}
 
 data class Titular(
     val nome: String,
     val cpf: String
-)
+) {
+    constructor(titular: TitularGrpc) : this(
+        titular.nome,
+        titular.cpf
+    )
+}
