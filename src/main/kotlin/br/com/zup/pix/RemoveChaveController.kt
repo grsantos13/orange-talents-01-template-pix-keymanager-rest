@@ -6,7 +6,6 @@ import io.micronaut.http.HttpResponse
 import io.micronaut.http.annotation.Controller
 import io.micronaut.http.annotation.Delete
 import io.micronaut.http.annotation.PathVariable
-import io.micronaut.tracing.annotation.NewSpan
 import java.util.*
 
 @Controller("/api/v1/clientes/{idCliente}/pix")
@@ -15,7 +14,6 @@ class RemoveChaveController(
 ) {
 
     @Delete("/{idPix}")
-    @NewSpan
     fun remover(@PathVariable idCliente: UUID, @PathVariable idPix: UUID): HttpResponse<Any> {
         val removeChavePixRequest = RemoveChavePixRequest.newBuilder()
             .setIdCliente(idCliente.toString())
