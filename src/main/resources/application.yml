@@ -2,6 +2,13 @@ micronaut:
   application:
     name: keymanagerRest
 
+info:
+  app:
+    name: KeymanagerRest
+    version: 1.0
+    kotlin-version: 1.4.30
+    micronaut-version: 2.3.4
+
 grpc:
   client:
     plaintext: true
@@ -12,6 +19,20 @@ grpc:
       plaintext: true
       max-retry-attempts: 10
 
+healthcheck:
+  keymanager:
+    url: http://${HEALTHCHECK_KEYMANAGER_HOST:localhost}:${HEALTHCHECK_KEYMANAGER_PORT:8080}/${HEALTHCHECK_KEYMANAGER_ENDPOINT:check-grpc-status}
+
 jackson:
   serialization:
     writeDatesAsTimestamps: false
+
+endpoints:
+  health:
+    enabled: true
+    sensitive: false
+    details-visible: ANONYMOUS
+  info:
+    enabled: true
+    sensitive: false
+    details-visible: ANONYMOUS
