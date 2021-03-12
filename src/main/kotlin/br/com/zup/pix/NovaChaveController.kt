@@ -7,6 +7,7 @@ import io.micronaut.http.annotation.Controller
 import io.micronaut.http.annotation.PathVariable
 import io.micronaut.http.annotation.Post
 import io.micronaut.http.uri.UriBuilder
+import io.micronaut.tracing.annotation.NewSpan
 import io.micronaut.validation.Validated
 import org.slf4j.LoggerFactory
 import java.util.*
@@ -21,6 +22,7 @@ class NovaChaveController(
     private val logger = LoggerFactory.getLogger(this::class.java)
 
     @Post
+    @NewSpan
     fun registrar(@PathVariable idCliente: UUID, @Body @Valid request: NovaChaveRequest): HttpResponse<Any> {
         logger.info("Cliente [$idCliente]: Registrando chave pix $request")
 

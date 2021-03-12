@@ -44,3 +44,14 @@ endpoints:
     sensitive: false
   prometheus:
     sensitive: false
+
+tracing:
+  jaeger:
+    enabled: ${JAEGER_ENABLED:true}
+    sampler:
+      probability: ${JAEGER_SAMPLE:1}
+    sender:
+      agentUrl: ${JAEGER_URL:http://localhost:14286/api/traces}
+    reporter:
+      flushInterval: 2000
+      maxQueueSize: 200
