@@ -1,6 +1,13 @@
 micronaut:
   application:
     name: keymanagerRest
+  metrics:
+    enabled: true
+    export:
+      prometheus:
+        enabled: true
+        step: PT1M
+        descriptions: true
 
 info:
   app:
@@ -35,4 +42,5 @@ endpoints:
   info:
     enabled: true
     sensitive: false
-    details-visible: ANONYMOUS
+  prometheus:
+    sensitive: false
