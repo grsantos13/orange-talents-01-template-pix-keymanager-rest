@@ -53,6 +53,17 @@ dependencies {
     runtimeOnly("io.opentracing.contrib:opentracing-grpc:0.2.3")
     runtimeOnly("ch.qos.logback:logback-classic")
     runtimeOnly("com.fasterxml.jackson.module:jackson-module-kotlin")
+    kapt("io.micronaut.openapi:micronaut-openapi:2.3.1")
+    implementation("io.swagger.core.v3:swagger-annotations")
+}
+
+kapt {
+    arguments {
+        arg(
+            "micronaut.openapi.views.spec",
+            "redoc.enabled=true,rapidoc.enabled=true,swagger-ui.enabled=true,swagger-ui.theme=flattop"
+        )
+    }
 }
 
 

@@ -9,6 +9,7 @@ import io.micronaut.http.annotation.Get
 import io.micronaut.http.client.RxHttpClient
 import io.micronaut.management.health.indicator.HealthIndicator
 import io.micronaut.management.health.indicator.HealthResult
+import io.swagger.v3.oas.annotations.Hidden
 import org.reactivestreams.Publisher
 import javax.inject.Singleton
 
@@ -27,6 +28,7 @@ class GrpcServerHealthCheck(
     }
 }
 
+@Hidden
 @Controller("/check-grpc-status")
 class GrpcHealthCheckController(
     private val healthCheckClient: HealthGrpc.HealthBlockingStub
