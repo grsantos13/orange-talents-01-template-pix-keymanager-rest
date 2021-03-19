@@ -23,7 +23,7 @@ data class NovaChaveRequest(
 ) {
     fun toGrpcRequest(idCliente: UUID): RegistraChavePixRequest {
         return RegistraChavePixRequest.newBuilder()
-            .setChave(chave)
+            .setChave(chave ?: "")
             .setIdCliente(idCliente.toString())
             .setTipoDeChave(TipoDeChaveGrpc.valueOf(tipo!!.name))
             .setTipoDeConta(TipoDeContaGrpc.valueOf(tipoDeConta!!.name))
