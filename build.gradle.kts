@@ -50,11 +50,13 @@ dependencies {
     implementation("io.micronaut:micronaut-tracing")
     implementation("io.jaegertracing:jaeger-thrift:0.31.0")
     implementation("io.micronaut:micronaut-http-client")
+    implementation("io.swagger.core.v3:swagger-annotations")
     runtimeOnly("io.opentracing.contrib:opentracing-grpc:0.2.3")
     runtimeOnly("ch.qos.logback:logback-classic")
     runtimeOnly("com.fasterxml.jackson.module:jackson-module-kotlin")
     kapt("io.micronaut.openapi:micronaut-openapi:2.3.1")
-    implementation("io.swagger.core.v3:swagger-annotations")
+    testImplementation("org.mockito:mockito-core")
+    testImplementation("org.mockito:mockito-inline:3.8.0")
 }
 
 kapt {
